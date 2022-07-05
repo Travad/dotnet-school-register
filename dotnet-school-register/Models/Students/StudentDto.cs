@@ -7,21 +7,19 @@ public class StudentDto
 {
     /* Properties */
     public int Id { get; set; }
-    public string Name { get; set; } = String.Empty;
+    public string FirstName { get; set; } = String.Empty;
     public string? MiddleName { get; set; }
-    public string Surname { get; set; } = String.Empty;
-    public int DayOfBirth { get; set; }
-    public int MonthOfBirth { get; set; }
-    public int YearOfBirth { get; set; }
+    public string LastName { get; set; } = String.Empty;
+    public DateTime BirthDate { get; set; } = DateTime.MinValue;
     public string Email { get; set; } = String.Empty;
     public string PhoneNumber { get; set; } = String.Empty;
     
-    public LocationStudentDto? Birthplace { get; set; }
+    public LocationStudentDto? BirthPlace { get; set; }
     public ICollection<AttendeeDto> Attendees { get; set; }
 
     /* Methods */
     public string FullName => 
         !string.IsNullOrWhiteSpace(MiddleName) 
-            ? $"{Name} {MiddleName} {Surname}" 
-            : $"{Name} {Surname}";
+            ? $"{FirstName} {MiddleName} {LastName}" 
+            : $"{FirstName} {LastName}";
 }

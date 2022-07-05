@@ -1,4 +1,6 @@
 using dotnet_school_register.Entities.Locations;
+using dotnet_school_register.Entities.Schools;
+using dotnet_school_register.Entities.Students;
 using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_school_register.DbContexts;
@@ -7,6 +9,8 @@ public class SchoolRegisterDbContext : DbContext
 {
     public DbSet<LocationSchool> LocationSchools { get; set; } = null!;
     public DbSet<LocationStudent> LocationStudents { get; set; } = null!;
+    public DbSet<Student> Students { get; set; } = null!;
+    public DbSet<School> Schools { get; set; } = null!;
 
     public SchoolRegisterDbContext(DbContextOptions<SchoolRegisterDbContext> options)
         : base(options)
@@ -31,6 +35,19 @@ public class SchoolRegisterDbContext : DbContext
                     Cap = "10867"
                 }
             );
+        
+        modelBuilder
+            .Entity<School>()
+            .HasData(
+                new School()
+                {
+                    Id = 1,
+                    Name = "I.T.T. Marconi",
+                    Description = "I.T.T. Marconi is a high-tech school with the purpose of providing high-quality IT-oriented education to the students of the province of Trento.",
+                    DateOfConstruction = new DateTime(1985, 1, 1),
+                    LocationSchoolId = 1,
+                }
+            );
 
         modelBuilder
             .Entity<LocationStudent>()
@@ -47,6 +64,21 @@ public class SchoolRegisterDbContext : DbContext
                 }
             );
         
+        modelBuilder
+            .Entity<Student>()
+            .HasData(
+                new Student()
+                {
+                    Id = 1,
+                    FirstName = "John",
+                    LastName = "Doe",
+                    BirthDate = new DateTime(2002, 12, 2),
+                    Email = "john.doe@gmail.com",
+                    PhoneNumber = "+41123456789",
+                    BirthPlaceId = 1,
+                }
+            );
+
         base.OnModelCreating(modelBuilder);
     }
 }

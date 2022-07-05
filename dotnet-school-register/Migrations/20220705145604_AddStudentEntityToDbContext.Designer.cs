@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dotnet_school_register.DbContexts;
 
@@ -10,9 +11,10 @@ using dotnet_school_register.DbContexts;
 namespace dotnet_school_register.Migrations
 {
     [DbContext(typeof(SchoolRegisterDbContext))]
-    partial class SchoolRegisterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220705145604_AddStudentEntityToDbContext")]
+    partial class AddStudentEntityToDbContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -137,54 +139,6 @@ namespace dotnet_school_register.Migrations
                         });
                 });
 
-            modelBuilder.Entity("dotnet_school_register.Entities.Schools.School", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("DateOfConstruction")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("LocationSchoolId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationSchoolId");
-
-                    b.ToTable("Schools");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateOfConstruction = new DateTime(1985, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "I.T.T. Marconi is a high-tech school with the purpose of providing high-quality IT-oriented education to the students of the province of Trento.",
-                            Email = "",
-                            LocationSchoolId = 1,
-                            Name = "I.T.T. Marconi",
-                            PhoneNumber = ""
-                        });
-                });
-
             modelBuilder.Entity("dotnet_school_register.Entities.Students.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -236,17 +190,6 @@ namespace dotnet_school_register.Migrations
                             LastName = "Doe",
                             PhoneNumber = "+41123456789"
                         });
-                });
-
-            modelBuilder.Entity("dotnet_school_register.Entities.Schools.School", b =>
-                {
-                    b.HasOne("dotnet_school_register.Entities.Locations.LocationSchool", "LocationSchool")
-                        .WithMany()
-                        .HasForeignKey("LocationSchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LocationSchool");
                 });
 
             modelBuilder.Entity("dotnet_school_register.Entities.Students.Student", b =>
