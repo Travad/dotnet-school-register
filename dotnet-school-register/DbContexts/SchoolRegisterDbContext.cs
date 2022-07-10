@@ -1,3 +1,6 @@
+using dotnet_school_register.Entities.Attendees;
+using dotnet_school_register.Entities.CourseAttendees;
+using dotnet_school_register.Entities.Courses;
 using dotnet_school_register.Entities.Grades;
 using dotnet_school_register.Entities.Locations;
 using dotnet_school_register.Entities.Schools;
@@ -12,6 +15,9 @@ public class SchoolRegisterDbContext : DbContext
     public DbSet<LocationStudent> LocationStudents { get; set; } = null!;
     public DbSet<Student> Students { get; set; } = null!;
     public DbSet<School> Schools { get; set; } = null!;
+    public DbSet<Course> Courses { get; set; } = null!;
+    public DbSet<Attendee> Attendees { get; set; } = null!;
+    public DbSet<CourseAttendee> CourseAttendees { get; set; } = null!;
     public DbSet<Grade> Grades { get; set; } = null!;
 
     public SchoolRegisterDbContext(DbContextOptions<SchoolRegisterDbContext> options)
@@ -81,17 +87,76 @@ public class SchoolRegisterDbContext : DbContext
                 }
             );
         
+        modelBuilder
+            .Entity<Attendee>()
+            .HasData(
+                new Attendee()
+                {
+                    Id = 1,
+                    StartDay = new DateTime(2020, 07, 12),
+                    EndDay = new DateTime(2020, 12, 31),
+                    StudentId = 1,
+                }
+            );
         
+        modelBuilder
+            .Entity<Course>()
+            .HasData(
+                new Course()
+                {
+                    Id = 1,
+                    Name = "Web Development",
+                    Description = "Web Development course is a course that teaches the basics of web development.",
+                    StartDate = new DateTime(2020, 7, 12),
+                    EndDate = new DateTime(2020, 12, 31),
+                    SchoolId = 1,
+                },
+                new Course()
+                {
+                    Id = 2,
+                    Name = "Mobile Development",
+                    Description = "Mobile Development course is a course that teaches the basics of mobile development.",
+                    StartDate = new DateTime(2020, 7, 12),
+                    EndDate = new DateTime(2020, 12, 31),
+                    SchoolId = 1,
+                }
+            );
         
+        modelBuilder
+            .Entity<CourseAttendee>()
+            .HasKey(c => new { c.CourseId, c.AttendeeId});
+        
+        modelBuilder
+            .Entity<CourseAttendee>()
+            .HasData(
+                new CourseAttendee()
+                {
+                    AttendeeId = 1,
+                    CourseId = 1,
+                },
+                new CourseAttendee()
+                {
+                    AttendeeId = 1,
+                    CourseId = 2,
+                }
+            );
+        
+        modelBuilder
+            .Entity<Grade>()
+            .HasOne(g => g.CourseAttendee)
+            .WithMany(g => g.Grades)
+            .HasForeignKey(fk => new { fk.CourseId, fk.AttendeeId });
+        //
         modelBuilder
             .Entity<Grade>()
             .HasData(
                 new Grade()
                 {
                     Id = 1,
-                    DateTime = new DateTimeOffset(2021, 10, 3, 10, 2, 0, TimeSpan.Zero),
-                    Mark = 8.9,
-                    CourseAttendeeId = 1,
+                    RegistrationTime = new DateTimeOffset(2020, 10, 3, 10, 22, 0, TimeSpan.FromHours(2)),
+                    GradeMark = 8.9,
+                    CourseId = 1,
+                    AttendeeId = 1,
                 }
             );
 

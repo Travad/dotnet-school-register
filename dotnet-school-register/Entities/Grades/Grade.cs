@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using dotnet_school_register.Models.CourseAttendees;
+using dotnet_school_register.Entities.CourseAttendees;
 
 namespace dotnet_school_register.Entities.Grades;
 
@@ -11,18 +11,18 @@ public class Grade
     public int Id { get; set; }
     
     [Required]
-    public DateTimeOffset DateTime { get; set; }
+    public DateTimeOffset RegistrationTime { get; set; }
     
     [Required]
     [Range(0.0, 10.0, ErrorMessage = "Please, insert a valid grade between 0 and 10")]
-    public double Mark { get; set; }
-
-    [ForeignKey(nameof(CourseAttendeeId))]
+    public double GradeMark { get; set; }
+    
+    // [Required]
+    // public GradeType GradeType { get; set; }
+    
     public CourseAttendee? CourseAttendee { get; set; }
-    public int CourseAttendeeId { get; set; }
+    public int? CourseId { get; set; }
+    public int? AttendeeId { get; set; }
 
 }
 
-public class CourseAttendee
-{
-}

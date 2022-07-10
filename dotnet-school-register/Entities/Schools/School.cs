@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using dotnet_school_register.Entities.Courses;
 using dotnet_school_register.Entities.Locations;
 
 namespace dotnet_school_register.Entities.Schools;
@@ -32,8 +33,4 @@ public class School
     public int LocationSchoolId { get; set; } 
     
     public ICollection<Course> Courses = new List<Course>();
-}
-
-public class Course
-{
 }

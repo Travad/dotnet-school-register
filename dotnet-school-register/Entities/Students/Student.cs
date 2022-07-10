@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using dotnet_school_register.Entities.Attendees;
 using dotnet_school_register.Entities.Locations;
 
 namespace dotnet_school_register.Entities.Students;
@@ -37,8 +38,4 @@ public class Student
 
     public ICollection<Attendee> Attendees = new List<Attendee>();
     
-}
-
-public class Attendee
-{
 }
