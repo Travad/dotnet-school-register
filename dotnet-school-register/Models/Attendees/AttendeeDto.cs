@@ -12,6 +12,6 @@ public class AttendeeDto
     
     public StudentDto Student { get; set; }
 
-    public ICollection<CourseAttendee> CourseAttendees { get; set; } =
-        new List<CourseAttendee>();
+    public ICollection<CourseAttendeeDto> CourseAttendees { get; set; } =
+        new List<CourseAttendeeDto>();
 }

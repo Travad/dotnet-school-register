@@ -14,6 +14,6 @@ public class CourseDto
 
     public SchoolDto School { get; set; }
 
-    public ICollection<CourseAttendee> CourseAttendees { get; set; } =
-        new List<CourseAttendee>();
+    public ICollection<CourseAttendeeDto> CourseAttendees { get; set; } =
+        new List<CourseAttendeeDto>();
 }

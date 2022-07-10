@@ -1,3 +1,4 @@
+using dotnet_school_register.Entities.Grades;
 using dotnet_school_register.Entities.Locations;
 using dotnet_school_register.Entities.Schools;
 using dotnet_school_register.Entities.Students;
@@ -11,6 +12,7 @@ public class SchoolRegisterDbContext : DbContext
     public DbSet<LocationStudent> LocationStudents { get; set; } = null!;
     public DbSet<Student> Students { get; set; } = null!;
     public DbSet<School> Schools { get; set; } = null!;
+    public DbSet<Grade> Grades { get; set; } = null!;
 
     public SchoolRegisterDbContext(DbContextOptions<SchoolRegisterDbContext> options)
         : base(options)
@@ -76,6 +78,20 @@ public class SchoolRegisterDbContext : DbContext
                     Email = "john.doe@gmail.com",
                     PhoneNumber = "+41123456789",
                     BirthPlaceId = 1,
+                }
+            );
+        
+        
+        
+        modelBuilder
+            .Entity<Grade>()
+            .HasData(
+                new Grade()
+                {
+                    Id = 1,
+                    DateTime = new DateTimeOffset(2021, 10, 3, 10, 2, 0, TimeSpan.Zero),
+                    Mark = 8.9,
+                    CourseAttendeeId = 1,
                 }
             );
 

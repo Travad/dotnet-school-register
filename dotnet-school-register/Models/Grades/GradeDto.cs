@@ -10,5 +10,5 @@ public class GradeDto
     public DateTimeOffset DateTime { get; set; }
     public double Mark { get; set; }
 
-    public CourseAttendee CourseAttendee { get; set; }
+    public CourseAttendeeDto CourseAttendee { get; set; }
 }

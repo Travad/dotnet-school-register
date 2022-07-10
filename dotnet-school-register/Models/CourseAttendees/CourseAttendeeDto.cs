@@ -3,7 +3,7 @@ using dotnet_school_register.Models.Courses;
 
 namespace dotnet_school_register.Models.CourseAttendees;
 
-public class CourseAttendee
+public class CourseAttendeeDto
 {
     public int CourseId { get; set; }
     public CourseDto Course { get; set; }
