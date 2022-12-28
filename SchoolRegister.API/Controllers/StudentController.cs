@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SchoolRegister.API.Models;
 using SchoolRegister.API.Services.Repositories.Students;
+using SchoolRegister.Models.Dto;
 
 namespace SchoolRegister.API.Controllers;
 

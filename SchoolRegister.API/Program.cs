@@ -1,6 +1,5 @@
 // 1. Configurations
 
-using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using SchoolRegister.API.DbContexts;
 using SchoolRegister.API.Services.Repositories.Students;

@@ -1,4 +1,4 @@
-using SchoolRegister.API.Entities;
+using SchoolRegister.Models.Entities;
 
 namespace SchoolRegister.API.Services.Repositories.Students;
 

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolRegister.API.DbContexts;
-using SchoolRegister.API.Entities;
+using SchoolRegister.Models.Entities;
 
 namespace SchoolRegister.API.Services.Repositories.Students;
 
