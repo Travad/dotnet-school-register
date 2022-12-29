@@ -1,3 +1,5 @@
+using FluentValidation.Results;
+
 namespace SchoolRegister.Api.Endpoints.Schools;
 
 public partial class SchoolEndpoints : IEndpoints
@@ -10,9 +12,30 @@ public partial class SchoolEndpoints : IEndpoints
     {
         app.MapGet(BaseRoute, GetSchoolsHandler)
             .WithName("GetSchools")
-            .WithTags(Tag)
             .Produces<IEnumerable<School>>(200)
-            .AllowAnonymous();
+            .AllowAnonymous()
+            .WithTags(Tag);
+
+        app.MapPost($"{BaseRoute}", CreateSchoolHandler)
+            .WithName("PostSchool")
+            .Accepts<School>(ContentType)
+            .Produces<School>(201).Produces(409)
+            .Produces<IEnumerable<ValidationFailure>>(400)
+            .WithTags(Tag);
+
+        app.MapPut($"{BaseRoute}/{{schoolGuid}}", PutSchoolHandler)
+            .WithName("PutSchool")
+            .Accepts<School>(ContentType)
+            .Produces<School>(200)
+            .Produces<IEnumerable<ValidationFailure>>(400)
+            .WithTags(Tag);
+
+        app.MapDelete($"{BaseRoute}/{{schoolGuid}}", DeleteSchoolHandler)
+            .WithName("DeleteSchool")
+            .Produces(204)
+            .Produces(404)
+            .WithTags(Tag);
+
     }
     
     public static void AddServices(IServiceCollection services, IConfiguration configuration)

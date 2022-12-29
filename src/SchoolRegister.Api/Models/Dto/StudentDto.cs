@@ -1,4 +1,4 @@
-namespace SchoolRegister.API.Models;
+namespace SchoolRegister.Api.Models.Dto;
 
 public class StudentDto
 {
@@ -11,12 +11,14 @@ public class StudentDto
     public string Email { get; set; } = String.Empty;
     public string PhoneNumber { get; set; } = String.Empty;
     
-    public LocationStudentDto? BirthPlace { get; set; }
-    public ICollection<AttendeeDto> Attendees { get; set; }
+    public LocationDto? BirthPlace { get; set; }
+    public ICollection<AttendeeDto> Attendees { get; set; } = 
+        new List<AttendeeDto>();
+    public int TotalNumberOfCoursesTakenByStudent => Attendees.Count;
 
     /* Methods */
     public string FullName => 
-        !string.IsNullOrWhiteSpace(MiddleName) 
+        string.IsNullOrWhiteSpace(MiddleName) 
             ? $"{FirstName} {MiddleName} {LastName}" 
             : $"{FirstName} {LastName}";
 }

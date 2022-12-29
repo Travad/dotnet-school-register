@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace SchoolRegister.Api.Validators;
 
 public class LocationSchoolValidator : AbstractValidator<Location>

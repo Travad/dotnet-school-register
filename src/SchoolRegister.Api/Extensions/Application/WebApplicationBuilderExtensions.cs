@@ -45,6 +45,9 @@ internal static class WebApplicationBuilderExtensions
         builder.Services.AddDbContext<SchoolRegisterDbContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
 
+        // Auto-mapper between entities (DB) and DTOs (CSharp Model)
+        builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // scan the assembly for AutoMapper profiles
+
         // Adding all the required services for the endpoints dynamically (using reflection)
         builder.Services.AddEndpoints<Program>(builder.Configuration);
 
