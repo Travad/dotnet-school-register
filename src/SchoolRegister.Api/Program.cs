@@ -1,6 +1,10 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+// 1. Initialize the WebApplicationBuilder and add all the require endpoints for the
+//      SchoolRegister API. The builder gives access to the Services,
+//      Configuration properties and Environment variables.
+var builder = WebApplication.CreateBuilder(args).AddSchoolRegisterServices();
 
-app.MapGet("/", () => "Hello World!");
+// 2. The application is built and the (minimal) endpoints are mapped to the app
+await using var app = builder.Build().UseSchoolRegisterServices();
 
-app.Run();
+// 3. Await the application run
+await app.RunAsync();

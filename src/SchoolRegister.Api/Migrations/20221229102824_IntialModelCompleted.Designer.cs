@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolRegister.Api.Data.Contexts;
 
@@ -10,9 +11,11 @@ using SchoolRegister.Api.Data.Contexts;
 namespace SchoolRegister.Api.Migrations
 {
     [DbContext(typeof(SchoolRegisterDbContext))]
-    partial class SchoolRegisterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221229102824_IntialModelCompleted")]
+    partial class IntialModelCompleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");

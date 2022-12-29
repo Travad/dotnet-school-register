@@ -1,8 +1,13 @@
-namespace SchoolRegister.Api.Extensions;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
+using JsonOptions = Microsoft.AspNetCore.Http.Json.JsonOptions;
+
+namespace SchoolRegister.Api.Extensions.Application;
 
 internal static class WebApplicationBuilderExtensions
 {
-    internal static WebApplicationBuilder AddSchoolRegisterEndpoints(
+    internal static WebApplicationBuilder AddSchoolRegisterServices(
         this WebApplicationBuilder builder)
     {
         // Check validity of the WebApplicationBuilder
@@ -23,11 +28,26 @@ internal static class WebApplicationBuilderExtensions
                         .AllowAnyHeader()
                         .AllowAnyHeader()
                         .AllowCredentials()));
-
-
-        // builder.Services.AddEndpoints<Program>(builder.Configuration);
         
+        // Handle circular references in System.Text.Json 
+        // More info: https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/preserve-references?pivots=dotnet-6-0
+        builder.Services.Configure<JsonOptions>(options =>
+            options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+   
+        // Adding swagger and explorer (metadata information)
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
         
+        // Adding the fluent validation for database entities
+        builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+        
+        // Adding the database context
+        builder.Services.AddDbContext<SchoolRegisterDbContext>(options =>
+            options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
+
+        // Adding all the required services for the endpoints dynamically (using reflection)
+        builder.Services.AddEndpoints<Program>(builder.Configuration);
+
         return builder;
     }
 }

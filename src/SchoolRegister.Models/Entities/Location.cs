@@ -1,16 +1,17 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SchoolRegister.API.Entities;
+namespace SchoolRegister.Models.Entities;
 
-public class LocationStudent
+public class LocationSchool
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
-    
-    [MaxLength(100)]
-    public string Country { get; set; } = string.Empty;
+    public Guid Id { get; set; }
+
+    [Required]
+    [MinLength(4), MaxLength(56)]
+    public string Country { get; set; } = default!;
     
     // US-based
     public string? State { get; set; }
@@ -19,17 +20,20 @@ public class LocationStudent
     public string? Province { get; set; }
     // CH-based
     public string? Canton { get; set; }
-
-    [Required]
-    public string City { get; set; } = string.Empty;
     
     [Required]
-    [MaxLength(5)]
-    public string Cap { get; set; } = string.Empty;
+    [MinLength(2), MaxLength(52)]
+    public string City { get; set; } = default!;
     
     [Required]
-    public string Address1 { get; set; } = string.Empty;
+    [StringLength(5, ErrorMessage = "CAP is 5 digits long, e.g. 38046")]
+    public string Cap { get; set; } = default!;
     
+    [Required]
+    [MinLength(2)]
+    public string Address1 { get; set; } = default!;
     public string? Address2 { get; set; }
     public string? Address3 { get; set; }
+    
+    
 }
