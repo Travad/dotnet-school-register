@@ -1,3 +1,5 @@
+using SchoolRegister.Api.Models.Dto.School;
+
 namespace SchoolRegister.Api.Models.Dto;
 
 public class StudentDto

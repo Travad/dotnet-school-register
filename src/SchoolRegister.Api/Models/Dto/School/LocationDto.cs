@@ -1,8 +1,8 @@
-namespace SchoolRegister.Api.Models.Dto;
+namespace SchoolRegister.Api.Models.Dto.School;
 
 public sealed record LocationDto
 {
-    public Guid Id { get; set; }
+    // public int Id { get; set; }
     public string Country { get; set; } = default!;
     
     // // US-based

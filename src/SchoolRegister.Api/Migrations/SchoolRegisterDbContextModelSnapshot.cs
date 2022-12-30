@@ -19,9 +19,9 @@ namespace SchoolRegister.Api.Migrations
 
             modelBuilder.Entity("SchoolRegister.Models.Entities.Attendee", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("EndDay")
                         .HasColumnType("TEXT");
@@ -29,8 +29,8 @@ namespace SchoolRegister.Api.Migrations
                     b.Property<DateTime>("StartDay")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StudentId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER");
@@ -44,19 +44,19 @@ namespace SchoolRegister.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("520dccb3-2a51-4022-a85a-215a5ba5fc4c"),
+                            Id = 1,
                             EndDay = new DateTime(2020, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StartDay = new DateTime(2020, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = new Guid("632dadd2-5fbd-4149-943c-776700697c2a"),
+                            StudentId = 1,
                             Type = 1
                         });
                 });
 
             modelBuilder.Entity("SchoolRegister.Models.Entities.Course", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -71,8 +71,8 @@ namespace SchoolRegister.Api.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("SchoolId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("SchoolId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
@@ -86,31 +86,31 @@ namespace SchoolRegister.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b5bad43d-b512-4d9e-a204-7b91ec9539ed"),
+                            Id = 1,
                             Description = "Web Development course is a course that teaches the basics of web development.",
                             EndDate = new DateTime(2020, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Web Development",
-                            SchoolId = new Guid("b198a1ec-b23f-49cc-91f5-4d2a4052331c"),
+                            SchoolId = 1,
                             StartDate = new DateTime(2020, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("b262e289-ef17-460d-99fb-5b7712469da1"),
+                            Id = 2,
                             Description = "Mobile Development course is a course that teaches the basics of mobile development.",
                             EndDate = new DateTime(2020, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Mobile Development",
-                            SchoolId = new Guid("b198a1ec-b23f-49cc-91f5-4d2a4052331c"),
+                            SchoolId = 1,
                             StartDate = new DateTime(2020, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
             modelBuilder.Entity("SchoolRegister.Models.Entities.CourseAttendee", b =>
                 {
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CourseId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("AttendeeId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("AttendeeId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("CourseId", "AttendeeId");
 
@@ -121,27 +121,27 @@ namespace SchoolRegister.Api.Migrations
                     b.HasData(
                         new
                         {
-                            CourseId = new Guid("b5bad43d-b512-4d9e-a204-7b91ec9539ed"),
-                            AttendeeId = new Guid("520dccb3-2a51-4022-a85a-215a5ba5fc4c")
+                            CourseId = 1,
+                            AttendeeId = 1
                         },
                         new
                         {
-                            CourseId = new Guid("b262e289-ef17-460d-99fb-5b7712469da1"),
-                            AttendeeId = new Guid("520dccb3-2a51-4022-a85a-215a5ba5fc4c")
+                            CourseId = 2,
+                            AttendeeId = 1
                         });
                 });
 
             modelBuilder.Entity("SchoolRegister.Models.Entities.Grade", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("AttendeeId")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("AttendeeId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("CourseId")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<double>("GradeMark")
                         .HasColumnType("REAL");
@@ -161,9 +161,9 @@ namespace SchoolRegister.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4835492c-fc96-40f1-83a2-6281427a0349"),
-                            AttendeeId = new Guid("520dccb3-2a51-4022-a85a-215a5ba5fc4c"),
-                            CourseId = new Guid("b5bad43d-b512-4d9e-a204-7b91ec9539ed"),
+                            Id = 1,
+                            AttendeeId = 1,
+                            CourseId = 1,
                             GradeMark = 8.9000000000000004,
                             GradeType = 0,
                             RegistrationTime = new DateTime(2020, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -172,9 +172,9 @@ namespace SchoolRegister.Api.Migrations
 
             modelBuilder.Entity("SchoolRegister.Models.Entities.Location", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Address1")
                         .IsRequired()
@@ -220,7 +220,7 @@ namespace SchoolRegister.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("745801d7-4678-473c-987d-8cbadfa3bfcb"),
+                            Id = 1,
                             Address1 = "Via Camolo, 13A",
                             Cap = "10867",
                             City = "Isernia",
@@ -230,7 +230,7 @@ namespace SchoolRegister.Api.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6a2fe967-daee-4a20-95ea-70f339dfc17c"),
+                            Id = 2,
                             Address1 = "Via Proviola, 2A",
                             Cap = "10867",
                             City = "Isernia",
@@ -242,9 +242,9 @@ namespace SchoolRegister.Api.Migrations
 
             modelBuilder.Entity("SchoolRegister.Models.Entities.School", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("DateOfConstruction")
                         .HasColumnType("TEXT");
@@ -257,8 +257,8 @@ namespace SchoolRegister.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("LocationSchoolId")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("LocationSchoolId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -278,11 +278,11 @@ namespace SchoolRegister.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b198a1ec-b23f-49cc-91f5-4d2a4052331c"),
+                            Id = 1,
                             DateOfConstruction = new DateTime(1985, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "I.T.T. Marconi is a high-tech school with the purpose of providing high-quality IT-oriented education to the students of the province of Trento.",
                             Email = "info@ittmarconi.it",
-                            LocationSchoolId = new Guid("745801d7-4678-473c-987d-8cbadfa3bfcb"),
+                            LocationSchoolId = 1,
                             Name = "I.T.T. Marconi",
                             PhoneNumber = "+390474560781"
                         });
@@ -290,15 +290,15 @@ namespace SchoolRegister.Api.Migrations
 
             modelBuilder.Entity("SchoolRegister.Models.Entities.Student", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("BirthPlaceId")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("BirthPlaceId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
                         .HasMaxLength(50)
@@ -331,9 +331,9 @@ namespace SchoolRegister.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("632dadd2-5fbd-4149-943c-776700697c2a"),
+                            Id = 1,
                             BirthDate = new DateTime(2002, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = new Guid("6a2fe967-daee-4a20-95ea-70f339dfc17c"),
+                            BirthPlaceId = 2,
                             Email = "john.doe@gmail.com",
                             FirstName = "John",
                             LastName = "Doe",
@@ -355,7 +355,7 @@ namespace SchoolRegister.Api.Migrations
             modelBuilder.Entity("SchoolRegister.Models.Entities.Course", b =>
                 {
                     b.HasOne("SchoolRegister.Models.Entities.School", "School")
-                        .WithMany()
+                        .WithMany("Courses")
                         .HasForeignKey("SchoolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -395,9 +395,7 @@ namespace SchoolRegister.Api.Migrations
                 {
                     b.HasOne("SchoolRegister.Models.Entities.Location", "LocationSchool")
                         .WithMany()
-                        .HasForeignKey("LocationSchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LocationSchoolId");
 
                     b.Navigation("LocationSchool");
                 });
@@ -406,9 +404,7 @@ namespace SchoolRegister.Api.Migrations
                 {
                     b.HasOne("SchoolRegister.Models.Entities.Location", "BirthPlace")
                         .WithMany()
-                        .HasForeignKey("BirthPlaceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BirthPlaceId");
 
                     b.Navigation("BirthPlace");
                 });
@@ -426,6 +422,11 @@ namespace SchoolRegister.Api.Migrations
             modelBuilder.Entity("SchoolRegister.Models.Entities.CourseAttendee", b =>
                 {
                     b.Navigation("Grades");
+                });
+
+            modelBuilder.Entity("SchoolRegister.Models.Entities.School", b =>
+                {
+                    b.Navigation("Courses");
                 });
 
             modelBuilder.Entity("SchoolRegister.Models.Entities.Student", b =>

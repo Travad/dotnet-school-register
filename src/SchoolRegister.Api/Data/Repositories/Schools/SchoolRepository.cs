@@ -17,10 +17,29 @@ public class SchoolRepository : ISchoolRepository
 
     public async Task<IEnumerable<School>> GetAllAsync()
         => await _context.Schools
-            .Include(s => s.Courses)
             .Include(s => s.LocationSchool)
+            .Include(s => s.Courses)
+                .ThenInclude(c => c.CourseAttendees)
             .OrderBy(s => s.Name)
             .ToListAsync();
+
+    public async Task<School?> SearchByNameAsync(string? searchTerm)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(searchTerm);
+
+        return await _context.Schools
+            .Where(s => s.Name.ToLower().Contains(searchTerm.Trim().ToLower()))
+            .Include(s => s.LocationSchool)
+            .Include(s => s.Courses)
+                .ThenInclude(c => c.CourseAttendees)
+            .FirstOrDefaultAsync();
+    }
+    public async Task<School?> GetSchoolByIdAsync(int schoolId) => 
+        await _context.Schools
+            .Include(s => s.LocationSchool)
+            .Include(s => s.Courses)
+                .ThenInclude(c => c.CourseAttendees)
+            .FirstOrDefaultAsync(s => s.Id == schoolId);
 
     public async Task<bool> UpdateAsync(School entity)
     {
@@ -39,13 +58,5 @@ public class SchoolRepository : ISchoolRepository
 
     public async Task<bool> SaveChangesAsync() =>
         await _context.SaveChangesAsync() >= 0;
-
-    public async Task<School?> SearchByNameAsync(string? searchTerm)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(searchTerm);
-
-        return await _context.Schools
-            .Where(s => s.Name.ToLower().Contains(searchTerm.Trim().ToLower()))
-            .FirstOrDefaultAsync();
-    }
+    
 }

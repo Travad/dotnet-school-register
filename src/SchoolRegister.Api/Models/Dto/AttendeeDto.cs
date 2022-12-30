@@ -2,7 +2,7 @@ namespace SchoolRegister.Api.Models.Dto;
 
 public class AttendeeDto
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public DateTime StartingDay { get; set; }
     public DateTime EndingDay { get; set; }
 

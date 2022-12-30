@@ -2,7 +2,7 @@ namespace SchoolRegister.Api.Models.Dto;
 
 public class GradeDto
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public DateTime RegistrationTime { get; set; }
     // public GradeType VoteType { get; set; }
     public double GradeMark { get; set; }
