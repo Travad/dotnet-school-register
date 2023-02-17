@@ -13,6 +13,11 @@ internal static class WebApplicationBuilderExtensions
         // Check validity of the WebApplicationBuilder
         ArgumentNullException.ThrowIfNull(builder);
         
+        // Register logging services
+        builder.Services.AddLogging(loggingBuilder => loggingBuilder
+            .AddConsole()
+            .AddFilter(level => level >= LogLevel.Trace));
+        
         // Enable CORS policies between SchoolRegister API and application
         // TODO: Update once the Blazor app is in place
         var webClientPort = builder.Configuration["WebClientPort"];

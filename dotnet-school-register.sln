@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolRegister.Api", "src\S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C9AA73B4-A70C-4FD5-ABC2-D2F7708C4688}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolRegister.Api.Tests", "tests\SchoolRegister.Api.Tests\SchoolRegister.Api.Tests.csproj", "{D85AAA08-4ED4-4C02-885D-C995F2ED8F82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolRegister.Api.Tests.Integration", "tests\SchoolRegister.Api.Tests.Integration\SchoolRegister.Api.Tests.Integration.csproj", "{40FF1DE1-3F85-4263-B365-D99A12F874F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,14 +24,14 @@ Global
 		{F87C2099-2E76-49F8-92C6-18B686013738}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F87C2099-2E76-49F8-92C6-18B686013738}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F87C2099-2E76-49F8-92C6-18B686013738}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D85AAA08-4ED4-4C02-885D-C995F2ED8F82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D85AAA08-4ED4-4C02-885D-C995F2ED8F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D85AAA08-4ED4-4C02-885D-C995F2ED8F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D85AAA08-4ED4-4C02-885D-C995F2ED8F82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40FF1DE1-3F85-4263-B365-D99A12F874F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40FF1DE1-3F85-4263-B365-D99A12F874F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40FF1DE1-3F85-4263-B365-D99A12F874F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40FF1DE1-3F85-4263-B365-D99A12F874F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{349F466F-9657-4F7A-B1BC-2FC459FEB834} = {D2AA6118-43EF-42A1-8716-49AF5C61D7B5}
 		{F87C2099-2E76-49F8-92C6-18B686013738} = {D2AA6118-43EF-42A1-8716-49AF5C61D7B5}
-		{D85AAA08-4ED4-4C02-885D-C995F2ED8F82} = {C9AA73B4-A70C-4FD5-ABC2-D2F7708C4688}
+		{40FF1DE1-3F85-4263-B365-D99A12F874F5} = {C9AA73B4-A70C-4FD5-ABC2-D2F7708C4688}
 	EndGlobalSection
 EndGlobal

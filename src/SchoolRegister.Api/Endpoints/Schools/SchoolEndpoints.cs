@@ -4,7 +4,7 @@ namespace SchoolRegister.Api.Endpoints.Schools;
 
 public partial class SchoolEndpoints : IEndpoints
 {
-    private const string BaseRoute = "school";
+    private const string BaseRoute = "schools";
     private const string Tag = "School";
     private const string ContentType = "application/json";
 
