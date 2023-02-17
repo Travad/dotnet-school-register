@@ -1,13 +1,14 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolRegister.Models.Entities;
 
-public class LocationSchool
+public sealed record Location
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [MinLength(4), MaxLength(56)]
@@ -34,6 +35,5 @@ public class LocationSchool
     public string Address1 { get; set; } = default!;
     public string? Address2 { get; set; }
     public string? Address3 { get; set; }
-    
     
 }

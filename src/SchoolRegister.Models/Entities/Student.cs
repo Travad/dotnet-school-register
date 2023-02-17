@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SchoolRegister.API.Entities;
+namespace SchoolRegister.Models.Entities;
 
-public class Student
+public sealed record Student
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -28,10 +28,10 @@ public class Student
     
     [MaxLength(50)]
     public string? PhoneNumber { get; set; } = String.Empty;
-    
-    [ForeignKey("BirthPlaceId")]
-    public LocationStudent? BirthPlace { get; set; }
-    public int BirthPlaceId { get; set; }
+
+    [ForeignKey(nameof(BirthPlaceId))] 
+    public Location? BirthPlace { get; set; }
+    public int? BirthPlaceId { get; set; }
 
     public ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
     

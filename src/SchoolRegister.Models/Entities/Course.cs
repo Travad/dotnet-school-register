@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SchoolRegister.API.Entities;
+namespace SchoolRegister.Models.Entities;
 
-public class Course
+public sealed record Course
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

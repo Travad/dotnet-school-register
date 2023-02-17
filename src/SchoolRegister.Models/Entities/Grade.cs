@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SchoolRegister.API.Entities;
+namespace SchoolRegister.Models.Entities;
 
-public class Grade
+public sealed record Grade
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,12 +16,19 @@ public class Grade
     [Range(0.0, 10.0, ErrorMessage = "Please, insert a valid grade between 0 and 10")]
     public double GradeMark { get; set; }
     
-    // [Required]
-    // public GradeType GradeType { get; set; }
+    [Required]
+    public GradeType GradeType { get; set; }
     
     public CourseAttendee? CourseAttendee { get; set; }
     public int? CourseId { get; set; }
     public int? AttendeeId { get; set; }
 
+}
+
+public enum GradeType
+{
+    Oral,
+    Written,
+    Exam
 }
 

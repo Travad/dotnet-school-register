@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
-namespace SchoolRegister.API.Entities;
+namespace SchoolRegister.Models.Entities;
 
-public class School
+public sealed record School
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -11,7 +12,7 @@ public class School
     
     [Required]
     [MaxLength(100)]
-    public string Name { get; set; } = String.Empty;
+    public string Name { get; set; } = default!;
     
     [MaxLength(512)]
     public string? Description { get; set; }
@@ -20,15 +21,16 @@ public class School
 
     [Required]
     [EmailAddress(ErrorMessage = "Please, make sure you entered a valid email address")]
-    public string Email { get; set; } = String.Empty;
+    public string Email { get; set; } = default!;
     
     [Required]
     [Phone(ErrorMessage = "Please, make sure you entered a valid phone number")]
-    public string PhoneNumber { get; set; } = String.Empty;
+    public string PhoneNumber { get; set; } = default!;
 
     [ForeignKey(name: nameof(LocationSchoolId))]
-    public LocationSchool? LocationSchool { get; set; }
-    public int LocationSchoolId { get; set; } 
+    public Location? LocationSchool { get; set; }
+    public int? LocationSchoolId { get; set; } 
     
-    public ICollection<Course> Courses = new List<Course>();
+    public ICollection<Course> Courses { get; set; } = new List<Course>();
+
 }

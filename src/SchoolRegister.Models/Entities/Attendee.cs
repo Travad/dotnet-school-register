@@ -1,24 +1,24 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SchoolRegister.API.Entities;
+namespace SchoolRegister.Models.Entities;
 
-public class Attendee
+public sealed record Attendee
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+
+    [Required] 
+    public AttendeeType Type { get; set; } = AttendeeType.PhysicalOnly;
     
-    // [Required]
-    // public AttendeeType Type { get; set; }
-    
-    [Required]
+    [Required] 
     public DateTime StartDay { get; set; }
     
-    [Required]
+    [Required] 
     public DateTime EndDay { get; set; }
     
-    [ForeignKey(nameof(StudentId))]
+    [ForeignKey(nameof(StudentId))] 
     public Student? Student { get; set; }
     public int StudentId { get; set; }
 

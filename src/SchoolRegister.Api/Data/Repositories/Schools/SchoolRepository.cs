@@ -11,7 +11,9 @@ public class SchoolRepository : ISchoolRepository
     
     public async Task<bool> CreateAsync(School entity)
     {
-        _context.Schools.Add(entity);
+        if (!await ExistsAsync(entity)) 
+            await _context.Schools.AddAsync(entity);
+        
         return await SaveChangesAsync();
     }
 
@@ -43,8 +45,13 @@ public class SchoolRepository : ISchoolRepository
 
     public async Task<bool> UpdateAsync(School entity)
     {
-        _context.Schools.Update(entity);
-        return await SaveChangesAsync();
+        if (await ExistsAsync(entity))
+        {
+            _context.Schools.Update(entity);
+            return await SaveChangesAsync();
+        }
+
+        return false;
     }
 
     public async Task<bool> DeleteAsync(School entity)
@@ -54,7 +61,7 @@ public class SchoolRepository : ISchoolRepository
     }
 
     public async Task<bool> ExistsAsync(School other) =>
-        await _context.Schools.AnyAsync(dbEntity => dbEntity == other);
+        await _context.Schools.AnyAsync(dbEntity => dbEntity.Id == other.Id);
 
     public async Task<bool> SaveChangesAsync() =>
         await _context.SaveChangesAsync() >= 0;

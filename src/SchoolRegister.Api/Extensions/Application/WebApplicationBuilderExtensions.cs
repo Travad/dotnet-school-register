@@ -44,7 +44,8 @@ internal static class WebApplicationBuilderExtensions
         // Adding the database context
         builder.Services.AddDbContext<SchoolRegisterDbContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
-
+            // options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresSQL")));
+            
         // Auto-mapper between entities (DB) and DTOs (CSharp Model)
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // scan the assembly for AutoMapper profiles
 

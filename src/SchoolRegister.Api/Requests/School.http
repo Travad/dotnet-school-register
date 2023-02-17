@@ -1,0 +1,19 @@
+###
+POST https://localhost:8888/school
+Content-Type: application/json
+
+{
+  "id": 13,
+  "name": "Liceo Galileo Galilei",
+  "description": "A fresh STEM liceo in the heart of the beatiful city of Trento",
+  "email": "info@galileitn.it",
+  "phoneNumber": "+390456764321",
+  "dateOfConstruction": "1995-03-12T00:00:00"
+}
+
+### Get all schools
+GET https://localhost:8888/school
+Accept: application/json
+
+
+

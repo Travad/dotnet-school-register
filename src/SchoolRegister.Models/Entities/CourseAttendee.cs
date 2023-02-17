@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SchoolRegister.API.Entities;
+namespace SchoolRegister.Models.Entities;
 
-public class CourseAttendee
+public sealed record CourseAttendee
 {   
     [ForeignKey(nameof(CourseId))]
     public Course? Course { get; set; }
