@@ -10,19 +10,6 @@ public partial class SchoolEndpoints : IEndpoints
 
     public static void DefineEndpoints(IEndpointRouteBuilder app)
     {
-        app.MapGet(BaseRoute, GetSchoolsHandler)
-            .WithName("GetSchools")
-            .Produces<IEnumerable<School>>(200)
-            .AllowAnonymous()
-            .WithTags(Tag);
-        
-        app.MapGet($"{BaseRoute}/{{schoolId}}", GetSchoolByIdHandler)
-            .WithName("GetSchool")
-            .Produces(200)
-            .Produces(404)
-            .AllowAnonymous()
-            .WithTags(Tag);
-        
         app.MapPost(BaseRoute, CreateSchoolHandler)
             .WithName("PostSchool")
             .Accepts<School>(ContentType)
@@ -35,6 +22,19 @@ public partial class SchoolEndpoints : IEndpoints
             .Accepts<School>(ContentType)
             .Produces<School>(200)
             .Produces<IEnumerable<ValidationFailure>>(400)
+            .WithTags(Tag);
+        
+        app.MapGet(BaseRoute, GetSchoolsHandler)
+            .WithName("GetSchools")
+            .Produces<IEnumerable<School>>(200)
+            .AllowAnonymous()
+            .WithTags(Tag);
+        
+        app.MapGet($"{BaseRoute}/{{schoolId}}", GetSchoolByIdHandler)
+            .WithName("GetSchool")
+            .Produces(200)
+            .Produces(404)
+            .AllowAnonymous()
             .WithTags(Tag);
 
         app.MapDelete($"{BaseRoute}/{{schoolId}}", DeleteSchoolHandler)

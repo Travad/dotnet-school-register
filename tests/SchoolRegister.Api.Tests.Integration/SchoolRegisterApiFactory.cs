@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -14,11 +15,13 @@ public class SchoolRegisterApiFactory : WebApplicationFactory<ISchoolRegisterApi
         builder.ConfigureTestServices(services =>
         {
             var options = new DbContextOptionsBuilder<SchoolRegisterDbContext>()
-                .UseInMemoryDatabase("TestDB")
+                .UseSqlite("DataSource=file:inmem?mode=memory&cache=shared")
                 .Options;
-
+            
             services.AddSingleton(options);
-            services.AddSingleton<SchoolRegisterDbContext>();
+            services.AddScoped<SchoolRegisterDbContext>();
+
+            services.AddAutoMapper(Assembly.LoadFrom("SchoolRegister.Api.dll"));
         });
     }
 }
