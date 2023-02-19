@@ -1,13 +1,8 @@
 using System.Net;
 using System.Net.Http.Json;
-using AutoMapper;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Testing;
 using SchoolRegister.Api.Models.Dto.School;
 using SchoolRegister.Models.Entities;
-using SQLitePCL;
 
 namespace SchoolRegister.Api.Tests.Integration;
 
@@ -252,6 +247,9 @@ public class SchoolEndpointsTests :
         getRequest.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
+    /// <summary>
+    /// 204 - NoContent: The resource was deleted correctly
+    /// </summary>
     [Fact]
     public async Task DeleteSchool_ShouldDeleteSchool_WhenSchoolExists()
     {
@@ -268,6 +266,22 @@ public class SchoolEndpointsTests :
         
         // Assert
         deleteRequest.StatusCode.Should().Be(HttpStatusCode.NoContent);
+    }
+    
+    /// <summary>
+    /// 404 - NotFound: The resource was not present in the backend
+    /// </summary>
+    [Fact]
+    public async Task DeleteSchool_ShouldNotDeleteSchool_WhenSchoolDoesNotExist()
+    {
+        // Arrange
+        var httpClient = _factory.CreateClient();
+        
+        // Act
+        var deleteRequest = await httpClient.DeleteAsync($"schools/{Int32.MaxValue}");
+        
+        // Assert
+        deleteRequest.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
     
     private School GenerateSchool(Location? location, List<Course>? courses) =>
