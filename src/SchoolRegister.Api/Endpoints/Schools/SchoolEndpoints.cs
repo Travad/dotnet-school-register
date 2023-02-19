@@ -21,6 +21,7 @@ public partial class SchoolEndpoints : IEndpoints
             .WithName("PutSchool")
             .Accepts<School>(ContentType)
             .Produces<School>(200)
+            .Produces(404)
             .Produces<IEnumerable<ValidationFailure>>(400)
             .WithTags(Tag);
         

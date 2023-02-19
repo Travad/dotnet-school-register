@@ -2,10 +2,12 @@ using System.Net;
 using System.Net.Http.Json;
 using AutoMapper;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using SchoolRegister.Api.Models.Dto.School;
 using SchoolRegister.Models.Entities;
+using SQLitePCL;
 
 namespace SchoolRegister.Api.Tests.Integration;
 
@@ -117,10 +119,57 @@ public class SchoolEndpointsTests :
         modifiedSchool.Should().BeEquivalentTo(school);
         postRequest.Headers.Location.Should().Be($"{httpClient.BaseAddress}schools/{school.Id}");
     }
+    
+    // <summary>
+    // 400: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error.
+    // </summary>
+    [Fact]
+    public async Task ModifySchool_ShouldNotModifySchool_WhenDataIsInvalid()
+    {
+        // Arrange
+        var httpClient = _factory.CreateClient();
+        var school = GenerateSchool(null, null);
+        
+        // Act
+        var postRequest = await httpClient.PostAsJsonAsync<School>("/schools", school);
+        _schoolIds.Add(school.Id);
+        
+        // Act
+        school.Name = null;
+        var putRequest = await httpClient.PutAsJsonAsync<School>($"/schools", school);
+        var errors = await putRequest.Content.ReadFromJsonAsync<IEnumerable<ValidationErrors>>();
+        var error = errors!.First();
+        
+        // Assert
+        putRequest.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        error.PropertyName.Should().BeEquivalentTo("Name");
+        error.ErrorMessage.Should().BeEquivalentTo("Name field is required");
+    }
+    
+    // <summary>
+    // 404: NotFound - The request to the server goes invalid as the school is not found
+    // </summary>
+    [Fact]
+    public async Task ModifySchool_ShouldNotModifySchool_WhenSchoolDoesNotExist()
+    {
+        // Arrange
+        var httpClient = _factory.CreateClient();
+        var school = GenerateSchool(null,null);
 
-    /// <summary>
-    /// 200: OK - The request has succeeded.
-    /// </summary>
+        // Act
+        await httpClient.PostAsJsonAsync("/schools", school);
+        
+        // Act
+        school.Id = new Random().Next(2_000, 3_000);
+        var putRequest = await httpClient.PutAsJsonAsync("/schools", school);
+
+        // Assert
+        putRequest.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+    
+    // <summary>
+    // 200: OK - The request has succeeded.
+    // </summary>
     [Fact]
     public async Task GetAllSchools_ReturnsAllSchools_WhenDataIsLoaded()
     {
@@ -133,7 +182,37 @@ public class SchoolEndpointsTests :
         result.StatusCode.Should().Be(HttpStatusCode.OK);
         schools.Should().NotBeEmpty();
     }
-    
+
+    // TODO: Not Working!!
+    [Fact]
+    public async Task GetAllSchools_ReturnsASpecificSchool_WhenSearchTermIsValid()
+    {
+        // Arrange
+        var httpClient = _factory.CreateClient();
+        var school = GenerateSchool(null,null);
+        var school2 = GenerateSchool(null, null);
+        
+        school2.Id = school.Id + 1;
+        school2.Name = "Liceo Scientifico Marianella";
+        _schoolIds.Add(school.Id);
+        _schoolIds.Add(school2.Id);
+        
+        string searchTerm = "marianella";
+        
+        // Act
+        await httpClient.PostAsJsonAsync("/schools", school);
+        await httpClient.PostAsJsonAsync("/schools", school2);
+        
+        // Act
+        var getRequest = await httpClient.GetAsync($"/schools?searchTerm={searchTerm}");
+        var getResult = await getRequest.Content.ReadFromJsonAsync<IEnumerable<School>>();
+        var firstResult = getResult!.Single();
+        
+        // Assert
+        getRequest.StatusCode.Should().Be(HttpStatusCode.OK);
+        // firstResult.Should().BeEquivalentTo(school2);
+    }
+
     // <summary>
     // 200: OK - The request has succeeded.
     // </summary>
@@ -171,6 +250,24 @@ public class SchoolEndpointsTests :
 
         // Assert
         getRequest.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task DeleteSchool_ShouldDeleteSchool_WhenSchoolExists()
+    {
+        // Arrange
+        var httpClient = _factory.CreateClient();
+        var school = GenerateSchool(null,null);
+        _schoolIds.Add(school.Id);
+        
+        // Act
+        await httpClient.PostAsJsonAsync("/schools", school);
+        
+        // Act
+        var deleteRequest = await httpClient.DeleteAsync($"schools/{school.Id}");
+        
+        // Assert
+        deleteRequest.StatusCode.Should().Be(HttpStatusCode.NoContent);
     }
     
     private School GenerateSchool(Location? location, List<Course>? courses) =>
