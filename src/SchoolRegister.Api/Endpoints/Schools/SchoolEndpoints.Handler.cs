@@ -45,6 +45,7 @@ public partial class SchoolEndpoints
                 new("Id", $"The resource with Id {school.Id} already exists!")
             });
 
+        // TODO: How to properly solve this?
         var createdSchool = await schoolRepository.CreateAsync(school);
         if (!createdSchool)
         {

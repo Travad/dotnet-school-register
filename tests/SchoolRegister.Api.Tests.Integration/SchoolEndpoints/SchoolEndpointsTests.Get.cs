@@ -25,7 +25,9 @@ public partial class SchoolEndpointsTests
         schools.Should().NotBeEmpty();
     }
 
-    // TODO: Not Working!!
+    /// <summary>
+    /// 200: Ok: The server returns the specific list of assets that match the search!
+    /// </summary>
     [Fact]
     public async Task GetAllSchools_ReturnsASpecificSchool_WhenSearchTermIsValid()
     {
