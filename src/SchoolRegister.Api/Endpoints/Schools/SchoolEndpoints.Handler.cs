@@ -51,7 +51,7 @@ public partial class SchoolEndpoints
             logger.LogError($"School with name {school.Id} was NOT created");
             return Results.BadRequest(new List<ValidationFailure>()
             {
-                new("Id", "A school with this Id already exists")
+                new("Id", $"There was an error creating this resource with Id: {school.Id}")
             });
         }
         

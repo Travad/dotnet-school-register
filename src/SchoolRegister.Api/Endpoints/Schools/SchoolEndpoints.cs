@@ -14,7 +14,8 @@ public partial class SchoolEndpoints : IEndpoints
         app.MapPost(BaseRoute, CreateSchoolHandler)
             .WithName("PostSchool")
             .Accepts<School>(ContentType)
-            .Produces<School>(201).Produces(409)
+            .Produces<School>(201)
+            .Produces(409)
             .Produces<IEnumerable<ValidationFailure>>(400)
             .WithTags(Tag);
         
