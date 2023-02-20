@@ -1,3 +1,4 @@
+using SchoolRegister.Api.Entities;
 using SchoolRegister.Api.Extensions.AutoMapping;
 using SchoolRegister.Api.Models.Dto.School;
 

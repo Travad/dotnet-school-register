@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 
-namespace SchoolRegister.Models.Entities;
+namespace SchoolRegister.Api.Entities;
 
 public sealed record School
 {

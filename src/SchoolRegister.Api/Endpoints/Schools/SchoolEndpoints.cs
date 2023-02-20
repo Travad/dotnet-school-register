@@ -1,4 +1,5 @@
 using FluentValidation.Results;
+using SchoolRegister.Api.Entities;
 
 namespace SchoolRegister.Api.Endpoints.Schools;
 

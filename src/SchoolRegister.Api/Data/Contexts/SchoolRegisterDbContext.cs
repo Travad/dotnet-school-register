@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Location = SchoolRegister.Models.Entities.Location;
+using SchoolRegister.Api.Entities;
+using Location = SchoolRegister.Api.Entities.Location;
 
 namespace SchoolRegister.Api.Data.Contexts;
 

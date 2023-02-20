@@ -1,3 +1,5 @@
+using SchoolRegister.Api.Entities;
+
 namespace SchoolRegister.Api.Data.Repositories.Schools;
 
 public class SchoolRepository : ISchoolRepository
@@ -25,7 +27,7 @@ public class SchoolRepository : ISchoolRepository
             .OrderBy(s => s.Name)
             .ToListAsync();
 
-    public async Task<School?> SearchByNameAsync(string? searchTerm)
+    public async Task<IEnumerable<School>?> SearchByNameAsync(string? searchTerm)
     {
         ArgumentException.ThrowIfNullOrEmpty(searchTerm);
 
@@ -34,8 +36,8 @@ public class SchoolRepository : ISchoolRepository
             .Include(s => s.LocationSchool)
             .Include(s => s.Courses)
                 .ThenInclude(c => c.CourseAttendees)
-            .FirstOrDefaultAsync();
-    }
+            .ToListAsync();
+    }   
     public async Task<School?> GetSchoolByIdAsync(int schoolId) => 
         await _context.Schools
             .Include(s => s.LocationSchool)

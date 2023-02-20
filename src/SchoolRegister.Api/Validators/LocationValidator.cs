@@ -1,3 +1,5 @@
+using SchoolRegister.Api.Entities;
+
 namespace SchoolRegister.Api.Validators;
 
 public class LocationSchoolValidator : AbstractValidator<Location>

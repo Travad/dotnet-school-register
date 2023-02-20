@@ -1,4 +1,5 @@
 using FluentValidation.Results;
+using SchoolRegister.Api.Entities;
 using SchoolRegister.Api.Models.Dto.School;
 
 namespace SchoolRegister.Api.Endpoints.Schools;
@@ -10,7 +11,7 @@ public partial class SchoolEndpoints
     {
         // If a search term is specified, look for one
         if (searchTerm is not null && !string.IsNullOrWhiteSpace(searchTerm))
-            return Results.Ok(mapper.Map<SchoolDto>(await schoolRepository.SearchByNameAsync(searchTerm)));
+            return Results.Ok(mapper.Map<IEnumerable<SchoolDto>>(await schoolRepository.SearchByNameAsync(searchTerm)));
         
         // Otherwise, return all
         return Results.Ok(

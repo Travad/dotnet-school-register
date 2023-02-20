@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D2AA6118-43EF-42A1-8716-49AF5C61D7B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolRegister.Models", "src\SchoolRegister.Models\SchoolRegister.Models.csproj", "{349F466F-9657-4F7A-B1BC-2FC459FEB834}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolRegister.Api", "src\SchoolRegister.Api\SchoolRegister.Api.csproj", "{F87C2099-2E76-49F8-92C6-18B686013738}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C9AA73B4-A70C-4FD5-ABC2-D2F7708C4688}"
@@ -16,10 +14,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{349F466F-9657-4F7A-B1BC-2FC459FEB834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{349F466F-9657-4F7A-B1BC-2FC459FEB834}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{349F466F-9657-4F7A-B1BC-2FC459FEB834}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{349F466F-9657-4F7A-B1BC-2FC459FEB834}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F87C2099-2E76-49F8-92C6-18B686013738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F87C2099-2E76-49F8-92C6-18B686013738}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F87C2099-2E76-49F8-92C6-18B686013738}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,7 +24,6 @@ Global
 		{40FF1DE1-3F85-4263-B365-D99A12F874F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{349F466F-9657-4F7A-B1BC-2FC459FEB834} = {D2AA6118-43EF-42A1-8716-49AF5C61D7B5}
 		{F87C2099-2E76-49F8-92C6-18B686013738} = {D2AA6118-43EF-42A1-8716-49AF5C61D7B5}
 		{40FF1DE1-3F85-4263-B365-D99A12F874F5} = {C9AA73B4-A70C-4FD5-ABC2-D2F7708C4688}
 	EndGlobalSection

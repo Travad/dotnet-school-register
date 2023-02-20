@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using SchoolRegister.Api.Entities;
 
 namespace SchoolRegister.Api.Validators;
 
